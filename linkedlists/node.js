@@ -5,7 +5,7 @@ class Node {
     }
   
     toString() {
-      return `${this.key}`;
+      return `${this.element}`;
     }
   }
   

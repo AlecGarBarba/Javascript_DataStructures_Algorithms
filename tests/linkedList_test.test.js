@@ -31,3 +31,24 @@ test('Get element At index',()=>{
     expect(ll.getElementAt(2)).toBe(3);
 
 })
+
+test('To string',()=>{
+    const ll = new LinkedList(); 
+    ll.push(1); 
+    ll.push(2);
+    ll.push(3); 
+    expect(ll.toString()).toBe('1,2,3')
+})
+
+
+test('Insert Element at position',()=>{
+    const ll = new LinkedList();
+    expect(ll.insert(0,-1)).toBe(false); 
+    ll.push(1); 
+    ll.push(2);
+    ll.push(3);
+    expect(ll.insert(0,0)).toBe(true); 
+    expect(ll.getElementAt(0)).toBe(0);
+    expect(ll.getElementAt(1)).toBe(1);
+    expect(ll.getElementAt(2)).toBe(2);
+})
