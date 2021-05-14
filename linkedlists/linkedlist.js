@@ -1,7 +1,7 @@
 const Node =require( './node');
 
 const defaultEquals=(a, b)=>{
-    return a === b;
+    return a == b;
 }
 
 class LinkedList {
@@ -10,7 +10,6 @@ class LinkedList {
         this.head=undefined;
         this.equalsFn = equalsFn;
     }
-
     
     push(element){
         const node = new Node(element);
@@ -27,31 +26,34 @@ class LinkedList {
         this.count++;
        
     }
-    insert(element,position){
-        if(position >=0 && position < this.count){
-            const node = new Node(element);
-            if(position===0){
-                //logic for first position
-                const current = this.head;
-                node.next = current;
-                this.head = node;
-            }else{
-                const previous = this.getNodeAt(position-1)
-                const current = this.getNodeAt(position)
-                previous.next = node;
-                node.next = current;
-            }
-            
-            this.count++;
-            return true;
 
+    insert(element,index){
+        if(index <0 || index >= this.count) return false;
+        const node = new Node(element);
+        if(index===0){
+            //logic for first position
+            const current = this.head;
+            node.next = current;
+            this.head = node;
         }else{
-            return false;
+            const previous = this.getNodeAt(index-1);
+            const current = this.getNodeAt(index);
+            previous.next = node;
+            node.next = current;
         }
-        
+        this.count++;
+        return true;
     }  
 
     indexOf(element){
+        let current = this.head;
+
+        for (let i = 0; i < this.count && current != null; i++){
+
+            if( this.equalsFn(current.element, element) ) return i;
+            current = current.next;
+        }
+        return -1;
 
     }
     
@@ -75,7 +77,13 @@ class LinkedList {
         }
     }
 
+    getHead(){
+        return this.head;
+    }
+
     remove(element){
+        const index = this.indexOf(element);
+        return this.removeAt(index);
 
     }
     
@@ -97,6 +105,7 @@ class LinkedList {
 
     
     isEmpty(){
+        return this.count ===0;
 
     }
     size(){
