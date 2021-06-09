@@ -28,7 +28,7 @@ class LinkedList {
     }
 
     insert(element,index){
-        if(index <0 || index >= this.count) return false;
+        if(index <0 || index >= this.count) { return false; }
         const node = new Node(element);
         if(index===0){
             //logic for first position
